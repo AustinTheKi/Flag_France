@@ -139,16 +139,12 @@ module tt_um_vga_example(
                 if (right_button && player_x <= SCREEN_W - PLAYER_W - 8)
                     player_x <= player_x + 8;
   	//falling speed
-    game_timer <= game_timer + 1;
-
-                if (game_timer >= 1) begin
-                    game_timer <= 0;
-                    fall_timer <= fall_timer + 1;
-                end
-
                 if (fall_timer >= 2) begin
-                    fall_timer <= 0;
-                    object_y <= object_y + 5;
+                  fall_timer <= 0;
+                  object_y <= object_y + 5;
+                end
+                else begin
+                  fall_timer <= fall_timer + 1;
                 end
     // Catch object
                 if (collision) begin

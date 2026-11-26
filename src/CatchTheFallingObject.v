@@ -133,10 +133,10 @@ module tt_um_vga_example(
     //movement
     if (!game_over && !game_win) begin
 
-                if (left_button && player_x > 0)
+                if (left_button && player_x > 8)
                     player_x <= player_x - 8;
 
-                if (right_button && player_x < SCREEN_W - PLAYER_W)
+                if (right_button && player_x <= SCREEN_W - PLAYER_W - 8)
                     player_x <= player_x + 8;
   	//falling speed
     game_timer <= game_timer + 1;

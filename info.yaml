@@ -19,8 +19,8 @@ project:
   source_files:
     - "hsync_generator.v"
     #- 1. Display image
-    - "Flag_france.v"
     - "CatchTheFallingObject.v"
+    - "Flag_france.v"
     # 2. Text mode
     #- "19_top_SwitchTextDisplay_playground.v"
     #- "19_text_screen_gen_playground.v"

@@ -111,7 +111,7 @@ module tt_um_vga_example(
                                 2'b00;
 
   
-   always @(posedge vsync or negedge rst_n) begin
+always @(posedge vsync or negedge rst_n) begin
         if (!rst_n) begin
             player_x      <= 290;
             object_x      <= 200;
@@ -130,15 +130,13 @@ module tt_um_vga_example(
         else begin
           random_counter <= random_counter + 1;
 
-    //movement
-    if (!game_over && !game_win) begin
-
+if (!game_over && !game_win) begin
                 if (left_button && player_x > 8)
                     player_x <= player_x - 8;
 
                 if (right_button && player_x <= SCREEN_W - PLAYER_W - 8)
                     player_x <= player_x + 8;
-  	//falling speed
+  
                 if (fall_timer >= 2) begin
                   fall_timer <= 0;
                   object_y <= object_y + 5;
@@ -146,34 +144,29 @@ module tt_um_vga_example(
                 else begin
                   fall_timer <= fall_timer + 1;
                 end
-    // Catch object
-                if (collision) begin
-                    if (score < 20)
-                        score <= score + 1;
 
-                    object_y <= 0;
-                    object_x <= random_counter % 600;
-                end
-     // Missed object
-                else if (object_y >= SCREEN_H - OBJECT_SIZE) begin
+if (collision) begin
+ if (score < 20)
+    score <= score + 1;
+   object_y <= 0;
+   object_x <= random_counter % 600;
+  end
 
-                    if (lives > 0)
-                        lives <= lives - 1;
+else if (object_y >= SCREEN_H - OBJECT_SIZE) begin
 
-                    object_y <= 0;
-                    object_x <= random_counter % 600;
+  if (lives > 0)
+    lives <= lives - 1;
 
-                end
+  object_y <= 0;
+  object_x <= random_counter % 600;
+  end
 
-      // Win condition
-                if (score >= 19 && collision)
-                    game_win <= 1;
+if (score >= 19 && collision)
+      game_win <= 1;
 
-                // Lose condition
-                if (lives == 1 &&
-                    object_y >= SCREEN_H - OBJECT_SIZE &&
-                    !collision)
-                    game_over <= 1;
+if (lives == 1 &&
+    object_y >= SCREEN_H - OBJECT_SIZE &&!collision)
+        game_over <= 1;
 
             end
         end
